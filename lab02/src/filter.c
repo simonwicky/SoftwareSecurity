@@ -267,16 +267,23 @@ void filter_edge_detect(struct image *img, void *threshold_arg) {
                         image_data[index_y][index_x].blue * weights_y[x][y];
                 }
             }
-            double g_red = sqrt(g_red_x * g_red_x + g_red_y * g_red_y);
-            double g_blue = sqrt(g_blue_x * g_blue_x + g_blue_y * g_blue_y);
-            double g_green =
-                sqrt(g_green_x * g_green_x + g_green_y * g_green_y);
-            double grad =
-                sqrt(g_red * g_red + g_blue * g_blue + g_green * g_green);
+            uint16_t g_red =
+                (uint16_t)sqrt(g_red_x * g_red_x + g_red_y * g_red_y);
+            uint16_t g_blue =
+                (uint16_t)sqrt(g_blue_x * g_blue_x + g_blue_y * g_blue_y);
+            uint16_t g_green =
+                (uint16_t)sqrt(g_green_x * g_green_x + g_green_y * g_green_y);
+            uint16_t grad = (uint16_t)sqrt(g_red * g_red + g_blue * g_blue +
+                                           g_green * g_green);
             if (grad > threshold) {
                 new_data[i][j].red = 0;
                 new_data[i][j].green = 0;
                 new_data[i][j].blue = 0;
+                new_data[i][j].alpha = image_data[i][j].alpha;
+            } else {
+                new_data[i][j].red = 255;
+                new_data[i][j].green = 255;
+                new_data[i][j].blue = 255;
                 new_data[i][j].alpha = image_data[i][j].alpha;
             }
         }
