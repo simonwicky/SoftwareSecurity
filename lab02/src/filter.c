@@ -149,7 +149,6 @@ void filter_sepia(struct image *img, void *depth_arg) {
     /* Iterate over all pixels */
     for (long i = 0; i < img->size_y; i++) {
         for (long j = 0; j < img->size_x; j++) {
-            /* TODO: Implement */
             struct pixel sepia;
             int average = (int)((image_data[i][j].red + image_data[i][j].blue +
                                  image_data[i][j].green) /
@@ -183,7 +182,6 @@ void filter_bw(struct image *img, void *threshold_arg) {
     /* Iterate over all pixels */
     for (long i = 0; i < img->size_y; i++) {
         for (long j = 0; j < img->size_x; j++) {
-            /* TODO: Implement */
             uint8_t average =
                 (uint8_t)((image_data[i][j].red + image_data[i][j].blue +
                            image_data[i][j].green) /
@@ -229,12 +227,63 @@ void filter_edge_detect(struct image *img, void *threshold_arg) {
     double weights_x[3][3] = {{-1, 0, 1}, {-2, 0, 2}, {-1, 0, 1}};
     double weights_y[3][3] = {{1, 2, 1}, {0, 0, 0}, {-1, -2, -1}};
 
+    struct pixel(*new_data)[img->size_x] =
+        malloc(sizeof(struct pixel) * img->size_x * img->size_y);
+
+    if (!new_data) {
+        return;
+    }
     /* Iterate over all pixels */
     for (long i = 0; i < img->size_y; i++) {
         for (long j = 0; j < img->size_x; j++) {
-            /* TODO: Implement */
+            int g_red_x = 0;
+            int g_red_y = 0;
+            int g_green_x = 0;
+            int g_green_y = 0;
+            int g_blue_x = 0;
+            int g_blue_y = 0;
+
+            for (int x = 0; x < 3; x++) {
+                for (int y = 0; y < 3; y++) {
+                    int index_y = i + y - 1 < 0 ? 0 : i + y - 1;
+                    int index_x = j + x - 1 < 0 ? 0 : j + x - 1;
+                    if (index_x > img->size_x - 1) {
+                        index_x = img->size_x - 1;
+                    }
+                    if (index_y > img->size_y - 1) {
+                        index_y = img->size_y - 1;
+                    }
+                    g_red_x +=
+                        image_data[index_y][index_x].red * weights_x[x][y];
+                    g_green_x +=
+                        image_data[index_y][index_x].green * weights_x[x][y];
+                    g_blue_x +=
+                        image_data[index_y][index_x].blue * weights_x[x][y];
+                    g_red_y +=
+                        image_data[index_y][index_x].red * weights_y[x][y];
+                    g_green_y +=
+                        image_data[index_y][index_x].green * weights_y[x][y];
+                    g_blue_y +=
+                        image_data[index_y][index_x].blue * weights_y[x][y];
+                }
+            }
+            double g_red = sqrt(g_red_x * g_red_x + g_red_y * g_red_y);
+            double g_blue = sqrt(g_blue_x * g_blue_x + g_blue_y * g_blue_y);
+            double g_green =
+                sqrt(g_green_x * g_green_x + g_green_y * g_green_y);
+            double grad =
+                sqrt(g_red * g_red + g_blue * g_blue + g_green * g_green);
+            if (grad > threshold) {
+                new_data[i][j].red = 0;
+                new_data[i][j].green = 0;
+                new_data[i][j].blue = 0;
+                new_data[i][j].alpha = image_data[i][j].alpha;
+            }
         }
     }
+    memcpy(img->px, new_data, sizeof(struct pixel) * img->size_x * img->size_y);
+    free(new_data);
+    return;
 }
 
 /* This filter performs keying, replacing the color specified by the argument
