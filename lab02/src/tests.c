@@ -167,7 +167,6 @@ START_TEST(sepia_example_image) {
 
     ck_assert_uint_eq(img_sepia->size_x, img->size_x);
     ck_assert_uint_eq(img_sepia->size_y, img->size_y);
-    printf("HERE\n");
     for (long j = 0; j < img->size_x * img->size_y; j++) {
         ck_assert_uint_eq(img_sepia->px[j].red, img->px[j].red);
         ck_assert_uint_eq(img_sepia->px[j].green, img->px[j].green);
@@ -179,7 +178,6 @@ START_TEST(sepia_example_image) {
     free(img->px);
     free(img_sepia);
     free(img);
-    printf("HERE2\n");
 }
 END_TEST
 
