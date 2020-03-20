@@ -167,6 +167,7 @@ START_TEST(sepia_example_image) {
 
     ck_assert_uint_eq(img_sepia->size_x, img->size_x);
     ck_assert_uint_eq(img_sepia->size_y, img->size_y);
+    printf("HERE\n");
     for (long j = 0; j < img->size_x * img->size_y; j++) {
         ck_assert_uint_eq(img_sepia->px[j].red, img->px[j].red);
         ck_assert_uint_eq(img_sepia->px[j].green, img->px[j].green);
@@ -481,13 +482,7 @@ START_TEST(grayscale_examples) {
 }
 END_TEST
 
-/* Verify that the black image is inverted properly to a white image.
- * Then invert the result again and verify that you get a black image back
- * The alpha channel needs to be intact in both cases */
-START_TEST(negative_functionality) {
-    /* TODO: Implement */
-    srand(time(NULL) ^ getpid());
-    // generate black image
+struct image gen_black_image() {
     struct image img;
     do {
         img.size_x = rand() % 512;
@@ -500,12 +495,25 @@ START_TEST(negative_functionality) {
     if (img.px == NULL) {
         assert(0 && "Rerun test, malloc failed");
     }
+
     for (long i = 0; i < img.size_y * img.size_x; i++) {
         img.px[i].red = 0;
         img.px[i].green = 0;
         img.px[i].blue = 0;
         img.px[i].alpha = 128;
     }
+    return img;
+}
+
+/* Verify that the black image is inverted properly to a white image.
+ * Then invert the result again and verify that you get a black image
+ * back The alpha channel needs to be intact in both cases */
+START_TEST(negative_functionality) {
+    /* TODO: Implement */
+    srand(time(NULL) ^ getpid());
+    // generate black image
+    struct image img = gen_black_image();
+
     filter_negative(&img, NULL);
     for (long i = 0; i < img.size_y * img.size_x; i++) {
         ck_assert_uint_eq(img.px[i].red, 255);
@@ -533,8 +541,9 @@ START_TEST(negative_zero_size) {
 }
 END_TEST
 
-/* Check for the simple, non-uniform, 3x3 test image that the blur filter
- * gives the correct output for different values of the radius (0, 1, 2, 3) */
+/* Check for the simple, non-uniform, 3x3 test image that the blur
+ * filter gives the correct output for different values of the radius
+ * (0, 1, 2, 3) */
 START_TEST(blur_functionality) {
     struct pixel black = {0, 0, 0, 255};
     struct pixel white = {252, 252, 252, 255};
@@ -589,7 +598,8 @@ START_TEST(blur_functionality) {
 END_TEST
 
 /* Verify that the filter doesn't crash when we provide extreme values
- * for the radius (INT_MIN, INT_MAX, 0, image_width, image_height, all of the
+ * for the radius (INT_MIN, INT_MAX, 0, image_width, image_height, all
+ * of the
  * previous values divided by 2, all of the previous values +- 1) */
 START_TEST(blur_radius_edge_cases) {
     srand(time(NULL) ^ getpid());
@@ -607,7 +617,8 @@ START_TEST(blur_radius_edge_cases) {
 }
 END_TEST
 
-/* Verify for a random image that the transparency filter works properly */
+/* Verify for a random image that the transparency filter works properly
+ */
 START_TEST(transparency_functionality) {
     srand(time(NULL) ^ getpid());
     struct image img = generate_rand_img();
