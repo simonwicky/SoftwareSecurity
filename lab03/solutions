@@ -1,0 +1,26 @@
+0 - Basics
+Demo : H_H_HELLO THERE, GENERAL KENOBI
+objdump : 298
+Strings : trololo
+objdump sections : dQw4w9WgXcQ
+objdump, advanced : 0000000000201120
+GDB, change variable : flaggy_flag
+
+1 - Reverse Engineering
+Hiding a bit : D0_y0u_l1ke_Kr4bbY_pAt71ez?
+Very Secure encryption : I_4m_a_h4Nds0me_R3V3rS3r
+Multi-layer security : I_rUn_0u7_oF_Fl4G_t3xTs
+Not orderly : I_<3_mY_s0F7W4re_5EcUR1tY_cl4ss
+Possibilities : 406979
+In plain sight : 1_c4n_m3sS_w17H_StR1pPpPPPppPeD_b1N4Riez
+
+2 - Exploitation
+Magic incantation : i-was-hiding-better-this-time-you-are-good
+Call for me : pineapple-on-pizza-is-good
+What's your name? : you-found-me-i-am-the-flag
+
+3 - Sanitization
+Much Security : doges-know-nothing-about-security
+Sanitized Globals : more-like-a-green-zone-am-i-right
+Sanitized stack : nicely-done
+Sanitized heap : asan-is-not-happy-you-bypassed-it
