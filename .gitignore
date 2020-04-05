@@ -3,3 +3,11 @@
 .vscode/
 .DS_Store
 
+
+*.gpr
+
+lab03/ctf.rep/
+
+lab03/Exploitation/.gdb_history
+
+lab03/Reverse_Engineering/.gdb_history
