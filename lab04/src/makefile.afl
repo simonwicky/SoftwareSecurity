@@ -1,5 +1,5 @@
-CC = gcc
-CFLAGS = -g
+CC = afl-gcc
+CFLAGS = -g -w -03
 
 all: libpngparser size
 
@@ -9,10 +9,10 @@ clean:
 .PHONY: all clean fix_all_bugs tests
 
 libpngparser: pngparser.h pngparser.c crc.c crc.h
-	$(CC) $(CFLAGS) -c pngparser.c crc.c
+	$(CC)  -c pngparser.c crc.c
 	ar rcs libpngparser.a pngparser.o crc.o
 
 
 size: libpngparser size.c
-	$(CC) $(CFLAGS) -o size size.c libpngparser.a -lz
+	$(CC)  -o size size.c libpngparser.a -lz
 

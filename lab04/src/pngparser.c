@@ -252,13 +252,14 @@ int is_png_filesig_valid(struct png_header_filesig *filesig)
  */
 int is_png_chunk_valid(struct png_chunk *chunk)
 {
-    uint32_t crc_value = crc((unsigned char *) &chunk->chunk_type, sizeof(int32_t));
+    // uint32_t crc_value = crc((unsigned char *) &chunk->chunk_type, sizeof(int32_t));
 
-    if (chunk->length) {
-        crc_value = update_crc(crc_value ^ 0xffffffffL, (unsigned char *) chunk->chunk_data, chunk->length) ^ 0xffffffffL;
-    }
+    // if (chunk->length) {
+    //     crc_value = update_crc(crc_value ^ 0xffffffffL, (unsigned char *) chunk->chunk_data, chunk->length) ^ 0xffffffffL;
+    // }
 
-    return chunk->crc == crc_value;
+    // return chunk->crc == crc_value;
+    return 1;
 }
 
 /* Fill the chunk with the data from the file.*/
@@ -297,7 +298,10 @@ int read_png_chunk(FILE *file, struct png_chunk *chunk)
     return 0;
 
 error:
-    if (chunk->chunk_data) free(chunk->chunk_data);
+    if (chunk->chunk_data){
+     free(chunk->chunk_data);
+     chunk->chunk_data = NULL;   
+    }
     return 1;
 }
 
@@ -413,6 +417,13 @@ struct image *convert_color_palette_to_image(png_chunk_ihdr *ihdr_chunk, png_chu
     uint32_t width = ihdr_header->width;
     uint32_t palette_idx = 0;
 
+    //For palette, the inflated data must by 1 * width * height + height
+    //check if width and height are <= inflated_size, because of overflow
+    if (width * height + height != inflated_size || height > inflated_size || width > inflated_size){
+        return NULL;
+    }
+    
+
     struct plte_entry *plte_entries = (struct plte_entry *) plte_chunk->chunk_data;
 
     struct image * img = malloc(sizeof(struct image));
@@ -445,6 +456,12 @@ struct image *convert_rgb_alpha_to_image(png_chunk_ihdr *ihdr_chunk, uint8_t *in
     struct png_header_ihdr *ihdr_header = (struct png_header_ihdr *) ihdr_chunk->chunk_data;
     uint32_t height = ihdr_header->height;
     uint32_t width = ihdr_header->width;
+
+    //For rgba, the inflated data must by 4 * width * height + height
+    //check if width and height are <= inflated_size, because of overflow
+    if (4 * width * height + height != inflated_size || height > inflated_size || width > inflated_size){
+        return NULL;
+    }
 
     uint32_t pixel_idx = 0;
     uint32_t r_idx, g_idx, b_idx, a_idx;
@@ -508,6 +525,9 @@ struct image *convert_data_to_image(png_chunk_ihdr *ihdr_chunk, png_chunk_plte *
     switch (ihdr_header->color_type)
     {
         case PNG_IHDR_COLOR_PALETTE:
+            if(!plte_chunk){
+                return NULL;
+            }
             return convert_color_palette_to_image(ihdr_chunk, plte_chunk, inflated_buf, inflated_size);
         case PNG_IHDR_COLOR_RGB_ALPHA:
             return convert_rgb_alpha_to_image(ihdr_chunk, inflated_buf, inflated_size);
@@ -704,7 +724,7 @@ int load_png(const char *filename, struct image **img)
 
     if (ihdr_chunk) free(ihdr_chunk);
 
-    return 0;
+    return 1;
 error:
     fclose(input);
 
@@ -721,7 +741,7 @@ error:
 
     if (ihdr_chunk) free(ihdr_chunk);
 
-    return 1;
+    return 0;
 }
 
 // Store a valid file signature

@@ -2,12 +2,11 @@
 *.dSYM
 .vscode/
 .DS_Store
-
+.gdb_history
 
 *.gpr
 
 lab03/ctf.rep/
 
-lab03/Exploitation/.gdb_history
-
-lab03/Reverse_Engineering/.gdb_history
+lab04/src/afl_in/
+lab04/src/afl_out/
