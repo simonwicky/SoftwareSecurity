@@ -3,10 +3,10 @@ Memory leak
 
 ### Description
 
-In case of error while reading chunk the iend_chunk in not freed.
+In case of error while reading a chunk, data from plte_chunk and ihdr_chunk are not freed.
 
 ### Affected Lines
-Allocated in `pngparser.c:589`.
+Allocated in `pngparser.c:277`.
 
 ### Expected vs Observed
 We expect no memory leaks, but we get one.
@@ -21,4 +21,4 @@ Run the fuzzer_load_png programm with the poc provided as input.
 ```
 
 ### Suggested Fix Description
-Free the chunk in case of error
+Free the chunk data in case of error

@@ -1,0 +1,26 @@
+INFO: Seed: 2752880616
+INFO: Loaded 1 modules   (239 inline 8-bit counters): 239 [0x5453a0, 0x54548f), 
+INFO: Loaded 1 PC tables (239 PCs): 239 [0x51e1b8,0x51f0a8), 
+./fuzzer_load_png: Running 1 inputs 1 time(s) each.
+Running: crash-32ad13c1dbb3ba846b3c78f7876c16c005b82780
+
+=================================================================
+==264==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 19 byte(s) in 2 object(s) allocated from:
+    #0 0x4caedd in malloc (/pwd/src/fuzzer_load_png+0x4caedd)
+    #1 0x4fbfe0 in read_png_chunk /pwd/src/pngparser.c:277:29
+    #2 0x50007e in load_png /pwd/src/pngparser.c:604:12
+    #3 0x4fa75d in LLVMFuzzerTestOneInput /pwd/src/fuzzer_load_png.c:15:3
+    #4 0x43a711 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) (/pwd/src/fuzzer_load_png+0x43a711)
+    #5 0x42457c in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) (/pwd/src/fuzzer_load_png+0x42457c)
+    #6 0x42a241 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) (/pwd/src/fuzzer_load_png+0x42a241)
+    #7 0x453092 in main (/pwd/src/fuzzer_load_png+0x453092)
+    #8 0x7f6e9a3d61e2 in __libc_start_main /build/glibc-t7JzpG/glibc-2.30/csu/../csu/libc-start.c:308:16
+
+SUMMARY: AddressSanitizer: 19 byte(s) leaked in 2 allocation(s).
+
+INFO: a leak has been found in the initial corpus.
+
+INFO: to ignore leaks on libFuzzer side use -detect_leaks=0.
+

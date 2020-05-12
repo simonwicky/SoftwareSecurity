@@ -739,9 +739,20 @@ error:
         free(current_chunk);
     }
 
-    if (plte_chunk) free(plte_chunk);
+    if (plte_chunk){
+        if (plte_chunk->chunk_data) {
+            free(plte_chunk->chunk_data);
+        }
+        free(plte_chunk);
+    } 
     if (iend_chunk) free(iend_chunk);
-    if (ihdr_chunk) free(ihdr_chunk);
+    if (ihdr_chunk) {
+        if (ihdr_chunk->chunk_data) {
+            free(ihdr_chunk->chunk_data);
+        }
+        
+        free(ihdr_chunk);
+    }
 
     return 1;
 }
