@@ -10,3 +10,15 @@ lab03/ctf.rep/
 
 lab04/src/afl_in/
 lab04/src/afl_out/
+
+lab04/libfuzzer/src/fuzzer_load_png
+
+lab04/libfuzzer/src/fuzzer_load_png_name
+
+lab04/libfuzzer/src/fuzzer_store_png_name
+
+lab04/libfuzzer/src/fuzzer_store_png_palette
+
+lab04/libfuzzer/src/fuzzer_store_png_rgba
+
+*.a
