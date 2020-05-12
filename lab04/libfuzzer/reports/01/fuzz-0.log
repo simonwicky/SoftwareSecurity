@@ -107,3 +107,99 @@ INFO: seed corpus: files: 14 min: 1b max: 1070b total: 1843b rss: 27Mb
 #4096	pulse  cov: 111 ft: 184 corp: 31/8434b lim: 1070 exec/s: 29 rss: 572Mb
 #4102	REDUCE cov: 111 ft: 184 corp: 31/8425b lim: 1070 exec/s: 29 rss: 572Mb L: 45/1070 MS: 1 EraseBytes-
 #4105	REDUCE cov: 112 ft: 185 corp: 32/8681b lim: 1070 exec/s: 29 rss: 572Mb L: 256/1070 MS: 3 ChangeByte-ChangeByte-PersAutoDict- DE: "IDAT"-
+#4236	REDUCE cov: 112 ft: 185 corp: 32/8672b lim: 1070 exec/s: 30 rss: 572Mb L: 86/1070 MS: 1 EraseBytes-
+#4328	REDUCE cov: 112 ft: 185 corp: 32/8622b lim: 1070 exec/s: 29 rss: 572Mb L: 202/1070 MS: 2 ChangeBit-EraseBytes-
+#4399	REDUCE cov: 112 ft: 185 corp: 32/8596b lim: 1070 exec/s: 29 rss: 572Mb L: 67/1070 MS: 1 EraseBytes-
+#4505	REDUCE cov: 112 ft: 185 corp: 32/8578b lim: 1070 exec/s: 30 rss: 572Mb L: 184/1070 MS: 1 EraseBytes-
+#4561	REDUCE cov: 112 ft: 185 corp: 32/8574b lim: 1070 exec/s: 30 rss: 572Mb L: 52/1070 MS: 1 EraseBytes-
+#4797	REDUCE cov: 112 ft: 185 corp: 32/8446b lim: 1070 exec/s: 29 rss: 572Mb L: 320/1070 MS: 1 EraseBytes-
+#4890	REDUCE cov: 112 ft: 185 corp: 32/8434b lim: 1070 exec/s: 29 rss: 572Mb L: 20/1070 MS: 3 InsertByte-ChangeASCIIInt-EraseBytes-
+#4901	REDUCE cov: 112 ft: 185 corp: 32/8424b lim: 1070 exec/s: 29 rss: 572Mb L: 246/1070 MS: 1 EraseBytes-
+#4911	REDUCE cov: 112 ft: 185 corp: 32/8340b lim: 1070 exec/s: 28 rss: 572Mb L: 162/1070 MS: 5 CopyPart-ShuffleBytes-ShuffleBytes-PersAutoDict-EraseBytes- DE: "PLTE"-
+#4952	REDUCE cov: 112 ft: 185 corp: 32/8323b lim: 1070 exec/s: 28 rss: 572Mb L: 91/1070 MS: 1 EraseBytes-
+#5001	REDUCE cov: 112 ft: 185 corp: 32/8289b lim: 1070 exec/s: 28 rss: 572Mb L: 128/1070 MS: 4 ChangeByte-CopyPart-ShuffleBytes-EraseBytes-
+#5082	REDUCE cov: 112 ft: 185 corp: 32/8234b lim: 1070 exec/s: 28 rss: 572Mb L: 73/1070 MS: 1 EraseBytes-
+#5211	REDUCE cov: 113 ft: 186 corp: 33/8345b lim: 1070 exec/s: 28 rss: 572Mb L: 111/1070 MS: 4 ChangeBinInt-ChangeBinInt-InsertRepeatedBytes-CMP- DE: "\x04\x00"-
+#5263	REDUCE cov: 113 ft: 186 corp: 33/8313b lim: 1070 exec/s: 28 rss: 572Mb L: 35/1070 MS: 2 ChangeByte-EraseBytes-
+#5375	REDUCE cov: 113 ft: 186 corp: 33/8311b lim: 1070 exec/s: 27 rss: 572Mb L: 114/1070 MS: 2 InsertByte-EraseBytes-
+#5747	REDUCE cov: 113 ft: 186 corp: 33/8271b lim: 1070 exec/s: 27 rss: 572Mb L: 47/1070 MS: 2 ChangeByte-EraseBytes-
+#5763	REDUCE cov: 113 ft: 186 corp: 33/8257b lim: 1070 exec/s: 27 rss: 572Mb L: 64/1070 MS: 1 EraseBytes-
+#5794	REDUCE cov: 113 ft: 186 corp: 33/8222b lim: 1070 exec/s: 27 rss: 572Mb L: 76/1070 MS: 1 EraseBytes-
+#6081	REDUCE cov: 113 ft: 186 corp: 33/8218b lim: 1070 exec/s: 27 rss: 572Mb L: 82/1070 MS: 2 ChangeBinInt-EraseBytes-
+#6242	REDUCE cov: 113 ft: 186 corp: 33/8214b lim: 1070 exec/s: 27 rss: 572Mb L: 252/1070 MS: 1 EraseBytes-
+#6369	REDUCE cov: 114 ft: 187 corp: 34/8466b lim: 1070 exec/s: 26 rss: 572Mb L: 252/1070 MS: 2 ChangeByte-PersAutoDict- DE: "\x01\x00\x00\x00\x00\x00\x00\x00"-
+#6442	REDUCE cov: 114 ft: 187 corp: 34/8394b lim: 1070 exec/s: 26 rss: 575Mb L: 180/1070 MS: 3 ShuffleBytes-ChangeByte-EraseBytes-
+#6535	REDUCE cov: 114 ft: 187 corp: 34/8379b lim: 1070 exec/s: 26 rss: 575Mb L: 165/1070 MS: 3 ShuffleBytes-ChangeBinInt-EraseBytes-
+#6773	REDUCE cov: 114 ft: 187 corp: 34/8369b lim: 1070 exec/s: 26 rss: 575Mb L: 34/1070 MS: 3 ChangeByte-InsertByte-EraseBytes-
+#6985	REDUCE cov: 114 ft: 187 corp: 34/8327b lim: 1070 exec/s: 26 rss: 575Mb L: 93/1070 MS: 2 CMP-EraseBytes- DE: "PLTE"-
+=================================================================
+==110==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000015731 at pc 0x0000004fe245 bp 0x7fffc4176050 sp 0x7fffc4176048
+WRITE of size 1 at 0x602000015731 thread T0
+    #0 0x4fe244 in convert_color_palette_to_image /pwd/src/pngparser.c:437:52
+    #1 0x4ff73c in convert_data_to_image /pwd/src/pngparser.c:515:20
+    #2 0x4ff847 in parse_png_no_interlace /pwd/src/pngparser.c:528:12
+    #3 0x4ffa60 in parse_png /pwd/src/pngparser.c:542:20
+    #4 0x5008e5 in load_png /pwd/src/pngparser.c:692:12
+    #5 0x4fa75d in LLVMFuzzerTestOneInput /pwd/src/fuzzer_load_png.c:15:3
+    #6 0x43a711 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) (/pwd/src/fuzzer_load_png+0x43a711)
+    #7 0x439e05 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool*) (/pwd/src/fuzzer_load_png+0x439e05)
+    #8 0x43bf2b in fuzzer::Fuzzer::MutateAndTestOne() (/pwd/src/fuzzer_load_png+0x43bf2b)
+    #9 0x43cca5 in fuzzer::Fuzzer::Loop(std::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&) (/pwd/src/fuzzer_load_png+0x43cca5)
+    #10 0x42a49b in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) (/pwd/src/fuzzer_load_png+0x42a49b)
+    #11 0x453092 in main (/pwd/src/fuzzer_load_png+0x453092)
+    #12 0x7f7a0b1051e2 in __libc_start_main /build/glibc-t7JzpG/glibc-2.30/csu/../csu/libc-start.c:308:16
+    #13 0x41e95d in _start (/pwd/src/fuzzer_load_png+0x41e95d)
+
+0x602000015731 is located 0 bytes to the right of 1-byte region [0x602000015730,0x602000015731)
+allocated by thread T0 here:
+    #0 0x4caedd in malloc (/pwd/src/fuzzer_load_png+0x4caedd)
+    #1 0x4fdcc4 in convert_color_palette_to_image /pwd/src/pngparser.c:425:15
+    #2 0x4ff73c in convert_data_to_image /pwd/src/pngparser.c:515:20
+    #3 0x4ff847 in parse_png_no_interlace /pwd/src/pngparser.c:528:12
+    #4 0x4ffa60 in parse_png /pwd/src/pngparser.c:542:20
+    #5 0x5008e5 in load_png /pwd/src/pngparser.c:692:12
+    #6 0x4fa75d in LLVMFuzzerTestOneInput /pwd/src/fuzzer_load_png.c:15:3
+    #7 0x43a711 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) (/pwd/src/fuzzer_load_png+0x43a711)
+    #8 0x439e05 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool*) (/pwd/src/fuzzer_load_png+0x439e05)
+    #9 0x43bf2b in fuzzer::Fuzzer::MutateAndTestOne() (/pwd/src/fuzzer_load_png+0x43bf2b)
+    #10 0x43cca5 in fuzzer::Fuzzer::Loop(std::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&) (/pwd/src/fuzzer_load_png+0x43cca5)
+    #11 0x42a49b in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) (/pwd/src/fuzzer_load_png+0x42a49b)
+    #12 0x453092 in main (/pwd/src/fuzzer_load_png+0x453092)
+    #13 0x7f7a0b1051e2 in __libc_start_main /build/glibc-t7JzpG/glibc-2.30/csu/../csu/libc-start.c:308:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow /pwd/src/pngparser.c:437:52 in convert_color_palette_to_image
+Shadow bytes around the buggy address:
+  0x0c047fffaa90: fa fa 00 05 fa fa 00 05 fa fa 00 05 fa fa 00 05
+  0x0c047fffaaa0: fa fa 00 05 fa fa 00 05 fa fa 00 05 fa fa 00 05
+  0x0c047fffaab0: fa fa 00 05 fa fa fd fd fa fa 00 05 fa fa fd fd
+  0x0c047fffaac0: fa fa 00 05 fa fa fd fd fa fa fd fd fa fa fd fd
+  0x0c047fffaad0: fa fa fd fd fa fa fd fd fa fa 00 05 fa fa 06 fa
+=>0x0c047fffaae0: fa fa 00 00 fa fa[01]fa fa fa fa fa fa fa fa fa
+  0x0c047fffaaf0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fffab00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fffab10: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fffab20: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fffab30: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+  Shadow gap:              cc
+==110==ABORTING
+MS: 1 ShuffleBytes-; base unit: 2d5ff885f157e7321b0f50c06272f3da682963af
+artifact_prefix='./'; Test unit written to ./crash-32ad13c1dbb3ba846b3c78f7876c16c005b82780

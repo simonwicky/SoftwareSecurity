@@ -11,7 +11,7 @@ In `pngparser.c:301`and `pngparser.c:721`
 We expect the programm to fail properly if a part is not valid, we observe a segmentation fault if `read_png_chunk()` fails.
 
 ### Steps to Reproduce
-Run size with the poc provided as input
+Run fuzzer_load_png with the poc provided as input
 
 #### Command
 
