@@ -1,0 +1,54 @@
+INFO: Seed: 1518368334
+INFO: Loaded 1 modules   (229 inline 8-bit counters): 229 [0x5453a0, 0x545485), 
+INFO: Loaded 1 PC tables (229 PCs): 229 [0x51e1b8,0x51f008), 
+INFO:       14 files found in ../seeds
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 4096 bytes
+INFO: seed corpus: files: 14 min: 1b max: 1070b total: 1843b rss: 27Mb
+=================================================================
+==76==ERROR: AddressSanitizer: attempting double-free on 0x7efee4577800 in thread T0:
+    #0 0x4cac5d in free (/pwd/src/fuzzer_load_png+0x4cac5d)
+    #1 0x500d18 in load_png /pwd/src/pngparser.c:721:13
+    #2 0x4fa75d in LLVMFuzzerTestOneInput /pwd/src/fuzzer_load_png.c:15:3
+    #3 0x43a711 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) (/pwd/src/fuzzer_load_png+0x43a711)
+    #4 0x439e05 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool*) (/pwd/src/fuzzer_load_png+0x439e05)
+    #5 0x43c3ab in fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&) (/pwd/src/fuzzer_load_png+0x43c3ab)
+    #6 0x43c9c0 in fuzzer::Fuzzer::Loop(std::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&) (/pwd/src/fuzzer_load_png+0x43c9c0)
+    #7 0x42a49b in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) (/pwd/src/fuzzer_load_png+0x42a49b)
+    #8 0x453092 in main (/pwd/src/fuzzer_load_png+0x453092)
+    #9 0x7efee970e1e2 in __libc_start_main /build/glibc-t7JzpG/glibc-2.30/csu/../csu/libc-start.c:308:16
+    #10 0x41e95d in _start (/pwd/src/fuzzer_load_png+0x41e95d)
+
+0x7efee4577800 is located 0 bytes inside of 1048589-byte region [0x7efee4577800,0x7efee467780d)
+freed by thread T0 here:
+    #0 0x4cac5d in free (/pwd/src/fuzzer_load_png+0x4cac5d)
+    #1 0x4fc903 in read_png_chunk /pwd/src/pngparser.c:301:28
+    #2 0x4ffe0e in load_png /pwd/src/pngparser.c:589:12
+    #3 0x4fa75d in LLVMFuzzerTestOneInput /pwd/src/fuzzer_load_png.c:15:3
+    #4 0x43a711 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) (/pwd/src/fuzzer_load_png+0x43a711)
+    #5 0x439e05 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool*) (/pwd/src/fuzzer_load_png+0x439e05)
+    #6 0x43c3ab in fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&) (/pwd/src/fuzzer_load_png+0x43c3ab)
+    #7 0x43c9c0 in fuzzer::Fuzzer::Loop(std::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&) (/pwd/src/fuzzer_load_png+0x43c9c0)
+    #8 0x42a49b in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) (/pwd/src/fuzzer_load_png+0x42a49b)
+    #9 0x453092 in main (/pwd/src/fuzzer_load_png+0x453092)
+    #10 0x7efee970e1e2 in __libc_start_main /build/glibc-t7JzpG/glibc-2.30/csu/../csu/libc-start.c:308:16
+
+previously allocated by thread T0 here:
+    #0 0x4caedd in malloc (/pwd/src/fuzzer_load_png+0x4caedd)
+    #1 0x4fbfe0 in read_png_chunk /pwd/src/pngparser.c:277:29
+    #2 0x4ffe0e in load_png /pwd/src/pngparser.c:589:12
+    #3 0x4fa75d in LLVMFuzzerTestOneInput /pwd/src/fuzzer_load_png.c:15:3
+    #4 0x43a711 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) (/pwd/src/fuzzer_load_png+0x43a711)
+    #5 0x439e05 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool*) (/pwd/src/fuzzer_load_png+0x439e05)
+    #6 0x43c3ab in fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&) (/pwd/src/fuzzer_load_png+0x43c3ab)
+    #7 0x43c9c0 in fuzzer::Fuzzer::Loop(std::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&) (/pwd/src/fuzzer_load_png+0x43c9c0)
+    #8 0x42a49b in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) (/pwd/src/fuzzer_load_png+0x42a49b)
+    #9 0x453092 in main (/pwd/src/fuzzer_load_png+0x453092)
+    #10 0x7efee970e1e2 in __libc_start_main /build/glibc-t7JzpG/glibc-2.30/csu/../csu/libc-start.c:308:16
+
+SUMMARY: AddressSanitizer: double-free (/pwd/src/fuzzer_load_png+0x4cac5d) in free
+==76==ABORTING
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+0x89,0x50,0x4e,0x47,0xd,0xa,0x1a,0xa,0x0,0x10,0x0,0xd,0x49,0x48,0x44,0x52,0x0,0x0,0x0,0x64,0x0,0x0,0x80,0x64,0xb3,0x6a,0x7f,0x77,0xde,0x23,0x93,0x4a,0x26,0x3b,0xe,0x57,0x7f,0x12,0x4b,0x95,0x24,0xfc,0xad,0x53,0xf5,0x5f,0xbd,0x47,0x26,0xb7,0x66,0x2,0x67,0xb3,0xf,0x89,0xbe,0xb,0x38,0xe6,0x50,
+\x89PNG\x0d\x0a\x1a\x0a\x00\x10\x00\x0dIHDR\x00\x00\x00d\x00\x00\x80d\xb3j\x7fw\xde#\x93J&;\x0eW\x7f\x12K\x95$\xfc\xadS\xf5_\xbdG&\xb7f\x02g\xb3\x0f\x89\xbe\x0b8\xe6P
+artifact_prefix='./'; Test unit written to ./crash-54632220f5c2cb61b58d4a50026e0c9a043685ea
+Base64: iVBORw0KGgoAEAANSUhEUgAAAGQAAIBks2p/d94jk0omOw5XfxJLlST8rVP1X71HJrdmAmezD4m+CzjmUA==
