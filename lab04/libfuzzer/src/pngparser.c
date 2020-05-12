@@ -417,6 +417,12 @@ struct image *convert_color_palette_to_image(png_chunk_ihdr *ihdr_chunk, png_chu
     uint32_t width = ihdr_header->width;
     uint32_t palette_idx = 0;
 
+    //For palette, the inflated data must by 1 * width * height + height
+    //check if width and height are <= inflated_size, because of overflow
+    if (width * height + height != inflated_size || height > inflated_size || width > inflated_size){
+        return NULL;
+    }
+
     struct plte_entry *plte_entries = (struct plte_entry *) plte_chunk->chunk_data;
 
     struct image * img = malloc(sizeof(struct image));
@@ -449,6 +455,12 @@ struct image *convert_rgb_alpha_to_image(png_chunk_ihdr *ihdr_chunk, uint8_t *in
     struct png_header_ihdr *ihdr_header = (struct png_header_ihdr *) ihdr_chunk->chunk_data;
     uint32_t height = ihdr_header->height;
     uint32_t width = ihdr_header->width;
+
+    //For rgba, the inflated data must by 4 * width * height + height
+    //check if width and height are <= inflated_size, because of overflow
+    if (4 * width * height + height != inflated_size || height > inflated_size || width > inflated_size){
+        return NULL;
+    }
 
     uint32_t pixel_idx = 0;
     uint32_t r_idx, g_idx, b_idx, a_idx;
@@ -716,6 +728,7 @@ error:
     fclose(input);
 
     if (deflated_buf) free(deflated_buf);
+    if (inflated_buf) free(inflated_buf);
 
     if (current_chunk) {
         if (current_chunk->chunk_data) {
@@ -727,7 +740,7 @@ error:
     }
 
     if (plte_chunk) free(plte_chunk);
-
+    if (iend_chunk) free(iend_chunk);
     if (ihdr_chunk) free(ihdr_chunk);
 
     return 1;
