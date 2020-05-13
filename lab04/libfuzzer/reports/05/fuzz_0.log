@@ -1,0 +1,26 @@
+INFO: Seed: 2741072096
+INFO: Loaded 1 modules   (241 inline 8-bit counters): 241 [0x5453a0, 0x545491), 
+INFO: Loaded 1 PC tables (241 PCs): 241 [0x51e1b8,0x51f0c8), 
+./fuzzer_load_png: Running 1 inputs 1 time(s) each.
+Running: crash-8586ea3f15c61a9320070f73d851850ad3099132
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==57==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000008 (pc 0x0000004fdbb6 bp 0x7fffa67eeef0 sp 0x7fffa67eec50 T0)
+==57==The signal is caused by a READ memory access.
+==57==Hint: address points to the zero page.
+    #0 0x4fdbb5 in convert_color_palette_to_image /pwd/src/pngparser.c
+    #1 0x4ff8ec in convert_data_to_image /pwd/src/pngparser.c:527:20
+    #2 0x4ff9f7 in parse_png_no_interlace /pwd/src/pngparser.c:540:12
+    #3 0x4ffc10 in parse_png /pwd/src/pngparser.c:554:20
+    #4 0x500a95 in load_png /pwd/src/pngparser.c:704:12
+    #5 0x4fa75d in LLVMFuzzerTestOneInput /pwd/src/fuzzer_load_png.c:15:3
+    #6 0x43a711 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) (/pwd/src/fuzzer_load_png+0x43a711)
+    #7 0x42457c in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) (/pwd/src/fuzzer_load_png+0x42457c)
+    #8 0x42a241 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) (/pwd/src/fuzzer_load_png+0x42a241)
+    #9 0x453092 in main (/pwd/src/fuzzer_load_png+0x453092)
+    #10 0x7f0775d911e2 in __libc_start_main /build/glibc-t7JzpG/glibc-2.30/csu/../csu/libc-start.c:308:16
+    #11 0x41e95d in _start (/pwd/src/fuzzer_load_png+0x41e95d)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /pwd/src/pngparser.c in convert_color_palette_to_image
+==57==ABORTING
