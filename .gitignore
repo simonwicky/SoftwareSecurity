@@ -24,3 +24,6 @@ lab04/libfuzzer/src/fuzzer_store_png_rgba
 *.a
 
 lab04/libfuzzer/seeds/
+
+*.zip
+
