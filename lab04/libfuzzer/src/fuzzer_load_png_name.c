@@ -7,24 +7,14 @@
 int LLVMFuzzerTestOneInput(const uint8_t *Data, size_t Size) {
   struct image *test_img;
 
-  if(Size == 0){
+  if(Size == 0 || Size > 255){
       return 0;
   }
       
-
   char filename[Size + 1];
   filename[Size] = '\0';
   memcpy(filename, Data, Size); 
-
-  FILE *input = fopen(filename,"w");
-  if (!input) 
-  {
-    return 0;
-  } 
-  fclose(input);
-  
-
+ 
   load_png(filename, &test_img);
-  remove(filename);
   return 0;
 }

@@ -8,7 +8,7 @@ int LLVMFuzzerTestOneInput(const uint8_t *Data, size_t Size) {
   if(Size < 10000) {
     return 0;
   }
-  printf("%zu", Size);
+  
   struct image *img;
   void* px = malloc(sizeof(uint8_t) * Size);
   memcpy(px, Data, Size);
