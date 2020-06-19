@@ -27,3 +27,9 @@ lab04/libfuzzer/seeds/
 
 *.zip
 
+
+exam/re/ghidra_project.rep/
+
+exam/re/ghidra_project.lock
+
+exam/re/ghidra_project.lock~
