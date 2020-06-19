@@ -1,0 +1,23 @@
+Q1. What class of bug are you reporting?                            [1 point]
+___
+
+Q2. Describe the bug:                              [3 points = 0.5 + 0.5 + 2]
+a) Where is the bug?
+File, line: ___
+Function: ___
+
+b) What capabilities does the bug give to the attacker? 
+___
+
+c) What are the conditions under which the bug can be exploited, and describe
+your exploit? 
+___
+
+Q3. Describe the fix for the bug:                       [2 points = 0.5 + 1.5]
+a) Can the vulnerability be mitigated through automated techniques?    
+   If yes, explain.
+___
+
+b) Describe a code-fix for the bug. This must correspond to the submitted patch.
+___
+

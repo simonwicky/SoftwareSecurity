@@ -1,0 +1,8 @@
+login u1
+pass p1
+whoami
+put hello 11
+get server_hello
+fault
+logout
+exit
