@@ -11,7 +11,7 @@ This bug allows the attacker to execute an arbitrary command.
 
 c) What are the conditions under which the bug can be exploited, and describe
 your exploit? 
-The server must finish setup and listening on port for commands. The client must log in and execute the command "ping t||/usr/bin/grassexternal.py". Due to no sanitizazion when preparing the ping command in command.cpp:97, the client can modiy the command itself, to cause ping to fail and execute the given command.
+The server must finish setup and listening on port for commands. The client must log in and execute the command "ping t||/usr/bin/grassexternal.py". Due to no sanitizazion when preparing the ping command in command.cpp:97, the client can modify the command itself, to cause ping to fail and execute the given command.
 
 Q3. Describe the fix for the bug:                       [2 points = 0.5 + 1.5]
 a) Can the vulnerability be mitigated through automated techniques?    
