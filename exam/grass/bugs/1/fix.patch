@@ -1,6 +1,6 @@
-diff -ru src_orig/commands/command.cpp src/commands/command.cpp
---- src_orig/commands/command.cpp	2020-06-20 15:14:47.000000000 +0200
-+++ src/commands/command.cpp	2020-06-20 15:15:20.000000000 +0200
+diff -ru src/commands/command.cpp src_patched/commands/command.cpp
+--- src/commands/command.cpp	2020-06-20 15:14:47.000000000 +0200
++++ src_patched/commands/command.cpp	2020-06-20 15:15:20.000000000 +0200
 @@ -8,6 +8,7 @@
  #include <linux/limits.h>
  #include <sys/stat.h>

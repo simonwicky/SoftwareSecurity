@@ -8,7 +8,6 @@
 #include <linux/limits.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <arpa/inet.h>
 
 #include "inc/services/threadpool.hpp"
 #include "inc/server/server.hpp"
@@ -95,13 +94,7 @@ int pingCommand::exec(std::string &result, UserState &state) {
   }
 
   char cmd[PATH_MAX];
-  struct sockaddr_in sa;
-  const char* host = args[0].c_str();
-  if (inet_pton(AF_INET, host, &(sa.sin_addr)) >= 0){
-    result.append(ERROR_STR "wrong address format\n");
-    return 0;
-  }
-  snprintf(cmd, PATH_MAX, "ping %s -c 1 >> %15s 2>&1", host, tmpName);
+  snprintf(cmd, PATH_MAX, "ping %s -c 1 >> %15s 2>&1", args[0].c_str(), tmpName);
   /* Ping success value is zero */
   int systemRetCode = system(cmd);
   if (systemRetCode >= 0) {
@@ -114,6 +107,7 @@ int pingCommand::exec(std::string &result, UserState &state) {
     result.append(ERROR_STR "ping failed\n");
 
   close(tmpFileFD);
+
   return (systemRetCode >= 0);
 }
 
