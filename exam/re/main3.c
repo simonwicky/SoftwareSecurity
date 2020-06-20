@@ -4,18 +4,6 @@
 
 extern long task3(long, unsigned long);
 
-long task(long base, unsigned long exponent){
-	long table[4] = {1, base, base*base, base*base*base};
-	long acc = 1;
-
-	for (int i = 62; i >= 0; i-=2)
-	{
-		int index = 3 & (exponent >> i);
-		acc = acc * acc * acc * acc;
-		acc *= table[index];
-	}
-	return acc;
-}
 
 int main(void)
 {

@@ -2,17 +2,8 @@
 
 
 
-long task5(unsigned long,unsigned long, long*, unsigned long*);
+extern long task5(unsigned long,unsigned long, long*, unsigned long*);
 
-long task5(unsigned long dividend ,unsigned long divisor , long* quotient, unsigned long* remainder){
-	*quotient = 0;
-	if (divisor == 0) {
-		return 1;
-	}
-	*quotient = dividend / divisor;
-	*remainder = dividend % divisor;
-	return 0;
-}
 
 
 int main(void)
