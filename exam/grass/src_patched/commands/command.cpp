@@ -405,8 +405,14 @@ int grepCommand::exec(std::string &result, UserState &state) {
   }
 
   char cmd[PATH_MAX];
-  snprintf(cmd, PATH_MAX, "cd %s; grep -r -l '%s' >> %15s 2>&1", state.curDir.c_str(), args[0].c_str(), tmpName);
-  int systemRetCode = system(cmd);
+  char grep_stmt[strlen(args[0].c_str())];
+  strcpy(grep_stmt, args[0].c_str());
+
+  //snprintf(cmd, PATH_MAX, "cd %s; grep -r -l '%s' >> %15s 2>&1", state.curDir.c_str(), grep_stmt, tmpName);
+  snprintf(cmd, PATH_MAX, "cd %s", state.curDir.c_str());
+  system(cmd);
+  char *args[] = {"-r", "-l", grep_stmt,">>", tmpName, "2>&1"};
+  int systemRetCode = execve("grep",args, nullptr);
   /* Grep return vals are
   * 0 = line selected
   * 1 = no line selected 
