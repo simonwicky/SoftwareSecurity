@@ -1,34 +1,19 @@
 diff -ru src/commands/command.cpp src_patched/commands/command.cpp
---- src/commands/command.cpp	2020-06-20 15:14:47.000000000 +0200
-+++ src_patched/commands/command.cpp	2020-06-20 15:15:20.000000000 +0200
-@@ -8,6 +8,7 @@
- #include <linux/limits.h>
- #include <sys/stat.h>
- #include <sys/types.h>
-+#include <arpa/inet.h>
- 
- #include "inc/services/threadpool.hpp"
- #include "inc/server/server.hpp"
-@@ -94,7 +95,13 @@
+--- src/commands/command.cpp	2020-06-20 18:23:24.000000000 +0200
++++ src_patched/commands/command.cpp	2020-06-20 18:24:46.000000000 +0200
+@@ -93,10 +93,10 @@
+     return 0;
    }
  
-   char cmd[PATH_MAX];
+-  char cmd[PATH_MAX];
 -  snprintf(cmd, PATH_MAX, "ping %s -c 1 >> %15s 2>&1", args[0].c_str(), tmpName);
-+  struct sockaddr_in sa;
-+  const char* host = args[0].c_str();
-+  if (inet_pton(AF_INET, host, &(sa.sin_addr)) >= 0){
-+    result.append(ERROR_STR "wrong address format\n");
-+    return 0;
-+  }
-+  snprintf(cmd, PATH_MAX, "ping %s -c 1 >> %15s 2>&1", host, tmpName);
-   /* Ping success value is zero */
-   int systemRetCode = system(cmd);
+-  /* Ping success value is zero */
+-  int systemRetCode = system(cmd);
++  char host[strlen(args[0].c_str())];
++  strcpy(host, args[0].c_str());
++  char *args[] = {host, "-c 1 >>", tmpName, "2>&1"};
++  int systemRetCode = execve("ping", args, nullptr);
    if (systemRetCode >= 0) {
-@@ -107,7 +114,6 @@
-     result.append(ERROR_STR "ping failed\n");
- 
-   close(tmpFileFD);
--
-   return (systemRetCode >= 0);
- }
- 
+     char buf[PATH_MAX];
+     memset(buf, 0, PATH_MAX);
+

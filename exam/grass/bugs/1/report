@@ -19,5 +19,5 @@ a) Can the vulnerability be mitigated through automated techniques?
    This vulnerability can be mitigated either by changing the source code, of by restricting the allowed system calls of the server.
 
 b) Describe a code-fix for the bug. This must correspond to the submitted patch.
-Use the inet_pton function to check that the argument given to ping is a valid IP address. Exit if it is not the case.
+Replace the system call by an execve call with the correct argument.
 
