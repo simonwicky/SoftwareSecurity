@@ -217,7 +217,6 @@ static RegularExpression * _parse_internal(const char ** str, size_t *len, int d
             head = next;
         } else {
             head->add(next);
-            next = nullptr;
         }
     }
 

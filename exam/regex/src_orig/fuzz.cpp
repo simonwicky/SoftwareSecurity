@@ -61,28 +61,14 @@ int LLVMFuzzerTestOneInput(const uint8_t *Data, size_t Size)
      text[Size - REG_LEN] = '\0';
 
      int err = 0;
+
      RegularExpression *r = parse(regex, strlen(regex), &err);
      if(err != 0) {
           return 0;
      }
      SearchExpression s(r);
      s.search(text, strlen(text));
+
      return 0;
 
-}
-
-int main(int argc, char *argv[]){
-
-     FILE* f = fopen(argv[1],"r");
-     size_t size;
-     fseek(f, 0L, SEEK_END);
-     size = ftell(f);
-     fseek(f, 0L, SEEK_SET);
-     uint8_t buf[size];
-     fread(buf, sizeof(uint8_t), size, f);
-     fclose(f);
-
-     buf[size] = 0;
-
-     LLVMFuzzerTestOneInput(buf, size);
 }
