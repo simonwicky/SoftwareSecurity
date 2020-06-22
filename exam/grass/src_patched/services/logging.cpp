@@ -44,22 +44,22 @@ void Logging::logFatal(std::string &&message) {
 }
 
 void Logging::logDebug(const char *message) {
-  printf("debug: ");printf(message);printf("\n");
+  printf("debug: ");printf("%s",message);printf("\n");
 }
 
 void Logging::logInfo(const char *message) {
-  printf("info: ");printf(message);printf("\n");
+  printf("info: ");printf("%s",message);printf("\n");
 }
 
 void Logging::logWarn(const char *message) {
-  printf("warning: ");printf(message);printf("\n");
+  printf("warning: ");printf("%s",message);printf("\n");
 }
 
 void Logging::logError(const char *message) {
-  printf("error: ");printf(message);printf("\n");
+  printf("error: ");printf("%s",message);printf("\n");
 }
 
 void Logging::logFatal(const char *message) {
-  printf("fatal: ");printf(message);printf("\n");
+  printf("fatal: ");printf("%s",message);printf("\n");
 }
 
