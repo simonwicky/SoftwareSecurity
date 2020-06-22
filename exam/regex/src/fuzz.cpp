@@ -84,5 +84,5 @@ int main(int argc, char *argv[]){
 
      buf[size] = 0;
 
-     LLVMFuzzerTestOneInput(buf, size);
+     return LLVMFuzzerTestOneInput(buf, size);
 }
