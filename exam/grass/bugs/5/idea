@@ -1,0 +1,5 @@
+Username too long causes segfault
+
+deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeffff
+
+Return address can be smashed. But segfault occurs before. Possibl to avoid it?
