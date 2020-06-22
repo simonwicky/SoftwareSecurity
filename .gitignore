@@ -33,3 +33,8 @@ exam/re/ghidra_project.rep/
 exam/re/ghidra_project.lock
 
 exam/re/ghidra_project.lock~
+
+exam/regex/src/afl_in
+exam/regex/src/afl_out/
+exam/regex/src/seed/
+exam/regex/src/AFL
