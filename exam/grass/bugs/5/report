@@ -1,23 +1,23 @@
 Q1. What class of bug are you reporting?                            [1 point]
-___
+Buffer overflow
 
 Q2. Describe the bug:                              [3 points = 0.5 + 0.5 + 2]
 a) Where is the bug?
-File, line: ___
-Function: ___
+File, line: user.cpp:88
+Function: UserState::makeUserFile
 
 b) What capabilities does the bug give to the attacker? 
-___
+This bug allows an attacker to overwrite the return address and hijack the control flow.
 
 c) What are the conditions under which the bug can be exploited, and describe
 your exploit? 
-___
+The server must finish setup and be listening on port for commands from the client. Note that the setup must contain a well-crafted username. This is acceptable since user usually choose their username. The client must then login with this username and the corresponding. During the userfile creation, the username length is not checked. The file name overflows the buffer, and the return address can be thus overwriten and the control-flow hijacked.
 
 Q3. Describe the fix for the bug:                       [2 points = 0.5 + 1.5]
 a) Can the vulnerability be mitigated through automated techniques?    
    If yes, explain.
-___
+	Yes. Stack canaries allows to protect continuous buffer overlflows to avoid overwriting the return address. ASLR also mitigates this technique, by randomizing the address layout, making the redirection much harder and less stable.
 
 b) Describe a code-fix for the bug. This must correspond to the submitted patch.
-___
+	When creating the file, pick only the first X characters of the username, so the full filename does not overflow the buffer size.
 
