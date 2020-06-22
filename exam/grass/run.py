@@ -78,7 +78,7 @@ def run_exploit(exploit_num):
 
 
 def parseargs():
-  N_bugs = 4
+  N_bugs = 5
 
   parser = argparse.ArgumentParser(
     description = '''
