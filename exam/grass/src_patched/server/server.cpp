@@ -252,7 +252,7 @@ void Server::getFile(const string filename, volatile int *getHandle, volatile in
 
   int readBytes;
   while (!server->exit) {
-    readBytes = read(inputFile, buffer, 2048);
+    readBytes = read(inputFile, buffer, 1024);
     if (readBytes == 0 || readBytes == -1)
       break;
 
