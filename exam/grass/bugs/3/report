@@ -1,23 +1,25 @@
 Q1. What class of bug are you reporting?                            [1 point]
-___
+Buffer overflow
 
 Q2. Describe the bug:                              [3 points = 0.5 + 0.5 + 2]
 a) Where is the bug?
-File, line: ___
-Function: ___
+File, line: server.cpp:255
+Function: Server::getFile
 
 b) What capabilities does the bug give to the attacker? 
-___
+This bugs allows the attacker to hijack the control flow to any address he wants, by overflowing a buffer in Server::getFile.
 
 c) What are the conditions under which the bug can be exploited, and describe
 your exploit? 
-___
+The server must finish setup and contain a "buggy" files ready to get. (The attacker could also put it before getting it.)
+By issueing a "get buggy" command, the server reads the files by chunk of 2048 bytes into a 1024 bytes buffer. This allows the attacker to craft this buggy file to overflow the buffer, overwrite the return address thus hijacking the control flow.
+To keep things as simple as possible, the buggy file is considered to already be on the server.
 
 Q3. Describe the fix for the bug:                       [2 points = 0.5 + 1.5]
 a) Can the vulnerability be mitigated through automated techniques?    
    If yes, explain.
-___
+   Yes. Stack canaries allows to protect continuous buffer overlflows to avoid overwriting the return address. ASLR also mitigates this technique, by randomizing the address layout, making the redirection much harder and less stable.
 
 b) Describe a code-fix for the bug. This must correspond to the submitted patch.
-___
+	Read the file by chunk of 1024 bytes into the buffer. (Alternatively, make the buffer 2048 bytes)
 

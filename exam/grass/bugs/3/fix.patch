@@ -1,0 +1,12 @@
+diff -ru src/server/server.cpp src_patched/server/server.cpp
+--- src/server/server.cpp	2020-06-22 12:55:43.000000000 +0200
++++ src_patched/server/server.cpp	2020-06-22 12:54:55.000000000 +0200
+@@ -252,7 +252,7 @@
+ 
+   int readBytes;
+   while (!server->exit) {
+-    readBytes = read(inputFile, buffer, 2048);
++    readBytes = read(inputFile, buffer, 1024);
+     if (readBytes == 0 || readBytes == -1)
+       break;
+ 

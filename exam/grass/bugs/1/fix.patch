@@ -1,0 +1,19 @@
+diff -ru src/commands/command.cpp src_patched/commands/command.cpp
+--- src/commands/command.cpp	2020-06-20 18:23:24.000000000 +0200
++++ src_patched/commands/command.cpp	2020-06-20 18:24:46.000000000 +0200
+@@ -93,10 +93,10 @@
+     return 0;
+   }
+ 
+-  char cmd[PATH_MAX];
+-  snprintf(cmd, PATH_MAX, "ping %s -c 1 >> %15s 2>&1", args[0].c_str(), tmpName);
+-  /* Ping success value is zero */
+-  int systemRetCode = system(cmd);
++  char host[strlen(args[0].c_str())];
++  strcpy(host, args[0].c_str());
++  char *args[] = {host, "-c 1 >>", tmpName, "2>&1"};
++  int systemRetCode = execve("ping", args, nullptr);
+   if (systemRetCode >= 0) {
+     char buf[PATH_MAX];
+     memset(buf, 0, PATH_MAX);
+

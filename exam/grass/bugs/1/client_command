@@ -1,0 +1,5 @@
+login u1
+pass p1
+ping ||/usr/bin/grassexternal.py&#
+logout
+exit

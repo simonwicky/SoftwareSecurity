@@ -4,7 +4,7 @@ INCLUDES := inc
 
 CC=gcc
 CPP=g++
-CFLAGS=-Wall -Wextra -g -fno-stack-protector -m32 -z execstack -pthread -I . -Wl,--section-start=.text=0x11111111
+CFLAGS=-Wall -Wextra -g -fno-stack-protector -no-pie -m32 -z execstack -pthread -I . -Wl,--section-start=.text=0x11111111
 
 # Source files
 CLIENT_SRC = $(SRCDIR)/client/client.cpp

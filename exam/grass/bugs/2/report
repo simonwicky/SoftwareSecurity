@@ -1,23 +1,23 @@
 Q1. What class of bug are you reporting?                            [1 point]
-___
+Command injection
 
 Q2. Describe the bug:                              [3 points = 0.5 + 0.5 + 2]
 a) Where is the bug?
-File, line: ___
-Function: ___
+File, line: command.cpp:402
+Function: grepCommand::exec
 
 b) What capabilities does the bug give to the attacker? 
-___
+This bug allows the attacker to execute an arbitrary command.
 
 c) What are the conditions under which the bug can be exploited, and describe
 your exploit? 
-___
+The server must finish setup and listening on port for commands. The client must log in and execute the command "grep ';/usr/bin/grassexternal.py&#'". Due to no sanitizazion when preparing the grep command in command.cpp:402, the client can modify the command itself, to execute a command after the grep command.
 
 Q3. Describe the fix for the bug:                       [2 points = 0.5 + 1.5]
 a) Can the vulnerability be mitigated through automated techniques?    
    If yes, explain.
-___
+   This vulnerability can be mitigated either by changing the source code, of by restricting the allowed system calls of the server.
 
 b) Describe a code-fix for the bug. This must correspond to the submitted patch.
-___
+Use execve instead of system, which allows to pass the argument separately and prevent the command execution.
 
