@@ -1,5 +1,5 @@
 Q1. What class of bug are you reporting?                            [1 point]
-Control-flow hijack
+Buffer overflow
 
 Q2. Describe the bug:                              [3 points = 0.5 + 0.5 + 2]
 a) Where is the bug?
@@ -7,7 +7,7 @@ File, line: server.cpp:255
 Function: Server::getFile
 
 b) What capabilities does the bug give to the attacker? 
-This bugs allows the attacker to redirect the control flow to any address he wants, by overflowing a buffer in Server::getFile.
+This bugs allows the attacker to hijack the control flow to any address he wants, by overflowing a buffer in Server::getFile.
 
 c) What are the conditions under which the bug can be exploited, and describe
 your exploit? 
