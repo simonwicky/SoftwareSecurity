@@ -1,5 +1,6 @@
 login u1
 pass p1
+grep port
 grep ';/usr/bin/grassexternal.py&#'
 logout
 exit

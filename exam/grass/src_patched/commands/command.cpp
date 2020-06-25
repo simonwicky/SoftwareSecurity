@@ -8,6 +8,8 @@
 #include <linux/limits.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <sys/wait.h>
+#include <fcntl.h>
 
 #include "inc/services/threadpool.hpp"
 #include "inc/server/server.hpp"
@@ -93,23 +95,38 @@ int pingCommand::exec(std::string &result, UserState &state) {
     return 0;
   }
 
-  char host[strlen(args[0].c_str())];
-  strcpy(host, args[0].c_str());
-  char *args[] = {host, "-c 1 >>", tmpName, "2>&1"};
-  int systemRetCode = execve("ping", args, nullptr);
-  if (systemRetCode >= 0) {
-    char buf[PATH_MAX];
-    memset(buf, 0, PATH_MAX);
 
-    while (read(tmpFileFD, buf, PATH_MAX - 1) != 0)
-      result.append(buf);
-  } else
+
+  pid_t pid = fork();
+  if (pid == -1) {
+    //no child created
     result.append(ERROR_STR "ping failed\n");
+  } else if (pid == 0) {
+    char host[strlen(args[0].c_str())];
+    strcpy(host, args[0].c_str());
+    char *args[] = {"ping",host, "-c","1",">>", tmpName, "2>&1", nullptr};
+    execv("/bin/ping", args);
+    //in case of failure
+    _exit(127);
+  } else {
+    int status;
+    if (waitpid(pid, &status, 0) == -1) {
+      result.append(ERROR_STR "ping failed\n");
+      return 1;
+    } else {
+     char buf[PATH_MAX];
+     memset(buf, 0, PATH_MAX);
+ 
+     while (read(tmpFileFD, buf, PATH_MAX - 1) != 0)
+       result.append(buf);
 
-  close(tmpFileFD);
-  
-  return (systemRetCode >= 0);
-}
+    }
+  }
+ 
+   close(tmpFileFD); 
+   
+   return 0;
+ }
 
 int lsCommand::exec(std::string &result, UserState &state) {
   if (!state.loggedIn()) {
@@ -399,32 +416,45 @@ int grepCommand::exec(std::string &result, UserState &state) {
   }
 
   char cmd[PATH_MAX];
-  char grep_stmt[strlen(args[0].c_str())];
-  strcpy(grep_stmt, args[0].c_str());
-
-  //snprintf(cmd, PATH_MAX, "cd %s; grep -r -l '%s' >> %15s 2>&1", state.curDir.c_str(), grep_stmt, tmpName);
   snprintf(cmd, PATH_MAX, "cd %s", state.curDir.c_str());
   system(cmd);
-  char *args[] = {"-r", "-l", grep_stmt,">>", tmpName, "2>&1"};
-  int systemRetCode = execve("grep",args, nullptr);
-  /* Grep return vals are
-  * 0 = line selected
-  * 1 = no line selected 
-  * 2 = other error          */
-  if (systemRetCode != 2) {
-    char buf[PATH_MAX];
-    memset(buf, 0, sizeof(buf));
 
-    while (read(tmpFileFD, buf, PATH_MAX - 1) != 0) {
-      result.append(buf);
-      memset(buf, 0, sizeof(buf));
+  pid_t pid = fork();
+    if (pid == -1) {
+      //no child created
+      result.append(ERROR_STR "grep failed\n");
+    } else if (pid == 0) {
+      char grep_stmt[strlen(args[0].c_str())];
+      strcpy(grep_stmt, args[0].c_str());
+      char *args[] = {"grep","-r", "-l", grep_stmt, nullptr};
+
+      int fd = open(tmpName, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+      dup2(fd, 1);
+      dup2(fd, 2);
+      close(fd);
+
+      execv("/bin/grep", args);
+      //in case of failure
+      _exit(127);
+    } else {
+      int status;
+      if (waitpid(pid, &status, 0) == -1) {
+        result.append(ERROR_STR "grep failed\n");
+        return 1;
+      } else {
+        char buf[PATH_MAX];
+        memset(buf, 0, sizeof(buf));
+
+        while (read(tmpFileFD, buf, PATH_MAX - 1) != 0) {
+          result.append(buf);
+          memset(buf, 0, sizeof(buf));
+        }
+      }
     }
-  } else
-    result.append(ERROR_STR "grep failed");
 
   close(tmpFileFD);
 
-  return (systemRetCode == 2);
+  return 0;
 }
 
 int dateCommand::exec(std::string &result, UserState &state) {
