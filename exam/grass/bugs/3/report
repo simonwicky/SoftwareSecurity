@@ -14,6 +14,7 @@ your exploit?
 The server must finish setup and contain a "buggy" files ready to get. (The attacker could also put it before getting it.)
 By issueing a "get buggy" command, the server reads the files by chunk of 2048 bytes into a 1024 bytes buffer. This allows the attacker to craft this buggy file to overflow the buffer, overwrite the return address thus hijacking the control flow.
 To keep things as simple as possible, the buggy file is considered to already be on the server.
+NOTE: This bug might not trigger due to timing issues with the logout.
 
 Q3. Describe the fix for the bug:                       [2 points = 0.5 + 1.5]
 a) Can the vulnerability be mitigated through automated techniques?    
