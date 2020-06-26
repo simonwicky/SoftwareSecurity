@@ -20,6 +20,9 @@ SearchExpression::~SearchExpression()
 
 int SearchExpression::match_first(const char * str, unsigned int len) const
 {
+    if (regex == nullptr) {
+        return -1;
+    }
     return regex->match(str, len);
 }
 
