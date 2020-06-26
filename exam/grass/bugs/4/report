@@ -12,6 +12,7 @@ This bug allows the attacker to write to any arbitrary location.
 c) What are the conditions under which the bug can be exploited, and describe
 your exploit? 
 The server must finish setup and be listening on port for commands from the client . A client must connect to the server, log in and issue the command put with a special crafted file. As part of logging, the server will print the content of the file on its console. This printf contains a format string vulnerability allowing the attack to write to any arbitrary location. 
+NOTE : This exploit is subject to timing issue. It might not print "Global corrupted" if the server stops before receiving the full file
 
 Q3. Describe the fix for the bug:                       [2 points = 0.5 + 1.5]
 a) Can the vulnerability be mitigated through automated techniques?    
