@@ -26,7 +26,7 @@ int LazyRepeatRangeExpression::match(const char * str, unsigned int len) const
             mlen_regex = match_first(&str[mlen], len - mlen);
             if (mlen_regex >= 0) {
                 ++i;
-                mlen += mlen_regex;
+                mlen += mlen_regex + 1;
             }
             else {
                 streak = false;

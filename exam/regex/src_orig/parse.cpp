@@ -42,9 +42,6 @@ static RegularExpression * try_parse_range(const char ** str, size_t *len, Regul
                 range = true;
                 next_state = STATE_PARSE_MAX;
             } else if (c >= '0' && c <= '9') {
-                if (min > UINT_MAX / 10) {
-                    goto error; //will overflow
-                }
                 min = min * 10 + (c - '0');
             } else if (c == '}') {
                 next_state = STATE_TRY_PARSE_LAZY; // parsing complete
@@ -58,9 +55,6 @@ static RegularExpression * try_parse_range(const char ** str, size_t *len, Regul
                 if (!max_available) {
                     max = 0;
                     max_available = true;
-                }
-                if (max > UINT_MAX / 10) {
-                    goto error; //will overflow
                 }
                 max = max * 10 + (c - '0');
             } else if (c == '}') {
@@ -223,7 +217,6 @@ static RegularExpression * _parse_internal(const char ** str, size_t *len, int d
             head = next;
         } else {
             head->add(next);
-            next = nullptr;
         }
     }
 
