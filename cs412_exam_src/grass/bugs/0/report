@@ -1,0 +1,43 @@
+Q1. What class of bug are you reporting?                            [1 point]
+Null-pointer dereference.
+
+Q2. Describe the bug:                              [3 points = 0.5 + 0.5 + 2]
+a) Where is the bug? 
+File: command.cpp:532
+Function: faultCommand::exec
+
+b) What capabilities does the bug give to the attacker?
+This bug allows the attacker to crash the server.
+Note: Other bugs might allow arbitrary reads/writes of one or more bytes, etc.
+
+c) What are the conditions under which the bug can be exploited, and describe
+your exploit? 
+The server must finish setup and be listening on port for commands from the 
+client. A client needs to connect to the server and issue the command 
+'fault'. At this point, the server looks up the correct handler ('exec' 
+function)for this command. On executing faultCommand::exec(), the null deref
+occurs, crashing the server. The client does not need to log into the server 
+to trigger this bug.
+
+For other bugs, you must describe the conditions that lead upto the bug.
+Also, describe the faulty code line or region, the stack layout if relevant, 
+the flow of data (in case you input invalid data at one point, which is used
+in a later part of code).
+
+Q3. Describe the fix for the bug:                       [2 points = 0.5 + 1.5]
+a) Can the vulnerability be mitigated through automated techniques?
+   If yes, explain.
+
+This bug cannot be fixed without fixing the source-code. For other bugs, you
+can describe mitigation measures (such as sanitizers or other security 
+approaches) which can prevent exploitation of this bug.
+
+b) Describe a code-fix for the bug. This must correspond to the submitted patch.
+
+The bug is due to an extraneous/unnecessary line of code. Therefore, the patch
+removes this line from the source. When the client issues the 'fault' command
+and the server executes faultCommand::exec(), the null-deref no longer happens.
+
+For fixes for other bugs, describe the checks and changes that can be introduced 
+to fix the bug. If relevant, suggest API changes that can help.
+
