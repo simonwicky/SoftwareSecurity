@@ -1,5 +1,7 @@
 login u1
 pass p1
 put buggy 11
+mkdir stall_instruction
+rm stall_instruction
 logout
 exit
