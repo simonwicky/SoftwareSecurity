@@ -1,5 +1,0 @@
-Bug 1 and 2 16 bytes for regex rest for text
-libfuzzer, fsanitize fuzzer and address
-
-Bug 3 and 4 first bytes is regex length
-libfuzzer fsanitize fuzzer unsigned-integer-overflow

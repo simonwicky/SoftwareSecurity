@@ -48,32 +48,6 @@ int LLVMFuzzerTestOneInput(const uint8_t *Data, size_t Size)
      *   bugs.
      */
     
-//     if (Size == 0) {
-//          return 0;
-//     }
-//     uint8_t *length = (uint8_t *)Data;
-
-//      if(Size < *length + 1) {
-//           return 0;
-//      }
-
-//      char regex[*length + 1];
-//      memcpy(regex, &Data[1], *length);
-//      regex[*length] = '\0';
-
-//      char text[Size - *length];
-//      memcpy(text, &Data[*length + 1], Size - *length - 1);
-//      text[Size - *length - 1] = '\0';
-
-//      int err = 0;
-//      RegularExpression *r = parse(regex, strlen(regex), &err);
-//      if(err != 0) {
-//           return 0;
-//      }
-//      SearchExpression s(r);
-//      s.search(text, strlen(text));
-//      return 0;
-
      if(Size < REG_LEN) {
           return 0;
      }
